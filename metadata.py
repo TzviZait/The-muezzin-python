@@ -1,5 +1,4 @@
 
-from dal import DAL
 
 from pathlib import Path
 
@@ -8,11 +7,11 @@ from datetime import datetime
 
 class Metadata:
 
-    def __init__(self,file_path):
-        self.dal = DAL().dal(file_path)
+    def __init__(self):
+        pass
 
-    def file_path(self):
-        return self.dal
+    def file_path(self,file_path):
+        return file_path
 
     def file_name(self,file):
         file_path = Path(file)

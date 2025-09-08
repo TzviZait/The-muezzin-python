@@ -8,6 +8,7 @@ class PushKafka:
 
     def __init__(self) -> None:
         pass
+
     def connect(self,address) -> None:
         self.producer = KafkaProducer(bootstrap_servers=address)
 
@@ -17,10 +18,3 @@ class PushKafka:
     def close(self) -> None:
         self.producer.close()
 
-data = DataToJson("C:/files").data_to_dict()
-pusher = PushKafka()
-pusher.connect("localhost:9092")
-for message,value in data.items():
-    # print(message,value)
-    pusher.send_by_topic_name("data",{message:value})
-pusher.close()

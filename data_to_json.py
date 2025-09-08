@@ -1,19 +1,21 @@
 from metadata import Metadata
 
-import os
 
 class DataToJson:
 
-    def __init__(self,file_path):
-        self.data = Metadata(file_path)
+    def __init__(self):
+        self.data = Metadata()
 
-    def data_to_dict(self):
+
+    def data_to_dict(self,dict_file):
+        my_list = []
         my_dict = {}
-        for entry_name in os.listdir(self.data.file_path()):
-            full_path = os.path.join(self.data.file_path(), entry_name)
-            my_dict[full_path] = {"file name":self.data.file_name(full_path),
-                                  "file_size":self.data.file_size(full_path),
-                                  "creation_file":self.data.creation_file(full_path)}
-        return my_dict
+        for file in dict_file:
+            my_dict[file] = {"file name":self.data.file_name(file),
+                                  "file_size":self.data.file_size(file),
+                                  "creation_file":self.data.creation_file(file)}
+            my_list.append(my_dict)
+            my_dict = {}
+        return my_list
 
 
