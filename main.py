@@ -4,6 +4,7 @@ from dal import DAL
 
 from push_kafka import PushKafka
 
+
 dal = DAL("C:/files")
 data = DataToJson()
 pusher = PushKafka()
@@ -14,3 +15,4 @@ if __name__ == "__main__":
         print(dict)
         pusher.send_by_topic_name("data",dict)
     pusher.close()
+    puller_
