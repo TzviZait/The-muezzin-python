@@ -11,7 +11,6 @@ from gridfs import GridFS
 
 from metadata import Metadata
 
-import base64
 
 class Subscriber:
 
@@ -27,16 +26,13 @@ class Subscriber:
             topic_name,
             bootstrap_servers=kafka_address,
             auto_offset_reset='earliest',
-            group_id='my-group'
+            group_id='my-group',
+            max_partition_fetch_bytes= 5242880
         )
 
     def puller_kafka(self):
-        print("jj")
         for message in self.consumer:
             message_val = json.loads(message.value.decode('utf-8'))
-            print("mm")
             for k,v in message_val.items():
                 index_es(k,message_val)
-            self.mongo.send_to_mongo(base64.b64encode(message_val.encode('utf-8')))
-            print(message_val)
 
