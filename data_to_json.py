@@ -1,5 +1,6 @@
 from metadata import Metadata
 
+from audio_to_text import AudioToText
 
 
 
@@ -7,11 +8,13 @@ class DataToJson:
 
     def __init__(self):
         self.data = Metadata()
+        self.audio = AudioToText()
 
 
     def data_to_dict(self,dict_file):
         my_list = []
         my_dict = {}
+        print("dd")
         for file in dict_file:
 
             my_dict[self.data.file_name(file) +" "+ str(self.data.file_size(file))] = \
@@ -19,7 +22,8 @@ class DataToJson:
                   "file_path":file,
                   "file_name":self.data.file_name(file),
                   "file_size":self.data.file_size(file),
-                  "creation_file":self.data.creation_file(file)
+                  "creation_file":self.data.creation_file(file),
+                  "audio_text":self.audio.audio_converter(file)
                  }
             my_list.append(my_dict)
             my_dict = {}
