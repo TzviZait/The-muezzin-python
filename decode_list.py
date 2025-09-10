@@ -16,4 +16,3 @@ class DecodeList:
         hostile_list = base64.b64decode(self.less_hostile).decode("utf-8").split(',')
         return hostile_list
 
-print(DecodeList().decode_less_hostile_list())
