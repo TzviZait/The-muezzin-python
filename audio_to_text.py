@@ -20,6 +20,7 @@ class AudioToText:
             # Recognize speech using Google Speech Recognition (requires internet connection)
             try:
                 text = r.recognize_google(audio_data)
+                print(text)
                 return text
             except sr.UnknownValueError:
                 print("Google Speech Recognition could not understand audio")

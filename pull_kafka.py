@@ -12,6 +12,8 @@ from gridfs import GridFS
 
 from metadata import Metadata
 
+from analysis import Analysis
+
 
 class Subscriber:
 
@@ -22,6 +24,7 @@ class Subscriber:
         self.fs = GridFS(self.mongo.mydb)
         self.metadata = Metadata()
         self.es = ElasticsearchIndex()
+        self.analysis = Analysis()
 
 
         self.consumer = KafkaConsumer(
@@ -34,6 +37,8 @@ class Subscriber:
     def puller_kafka(self):
         for message in self.consumer:
             message_val = json.loads(message.value.decode('utf-8'))
-            self.es.elastic_index(message_val)
-            print("tzvi")
+            self.es.elastic_index()
+            self.analysis.data_analysis(message_val)
+
+
 

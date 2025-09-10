@@ -18,7 +18,7 @@ class ElasticsearchIndex:
         self.dal = DAL(os.getenv("FILE_PATH"))
         self.data = DataToJson()
 
-    def elastic_index(self,dict):
+    def elastic_index(self):
 
         index_body = {
             "settings": {
@@ -36,13 +36,11 @@ class ElasticsearchIndex:
             }
         }
 
-        # documents = self.data.data_to_dict(self.dal.dal())
         if not self.es.indices.exists(index=self.index_name):
             self.es.indices.create(index=self.index_name, body=index_body)
 
 
-        for k, v in dict.items():
-            self.es.index(index=self.index_name, id=k, body=v)
+
 
 
 
